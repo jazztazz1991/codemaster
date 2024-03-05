@@ -3,6 +3,26 @@
     background: linear-gradient(180deg, rgba(31,41,55,1) 0%, rgba(255,255,255,1) 100%);
     border-top: 1px solid rgb(26, 35, 46);
 }
+/* exercise list CSS */
+#exercisesPage{
+    margin-bottom: 100px;
+}
+#easy{
+    background-color: lightgreen;
+    padding: 2px 5px;
+    border-radius: 30%;
+}
+#medium{
+    background-color: yellow;
+    padding: 2px 5px;
+    border-radius: 30%;
+}
+#hard{
+    background-color: lightcoral;
+    padding: 2px 5px;
+    border-radius: 30%;
+}
+/* exercise/[id] CSS */
 #results{
     margin-bottom: 100px;
 }
