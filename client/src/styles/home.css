@@ -1,0 +1,11 @@
+.hero{
+    background: rgb(31,41,55);
+    background: linear-gradient(180deg, rgba(31,41,55,1) 0%, rgba(255,255,255,1) 100%);
+    border-top: 1px solid rgb(26, 35, 46);
+}
+#results{
+    margin-bottom: 100px;
+}
+.loggedResults{
+    color: rgba(31,41,55,1);
+}
