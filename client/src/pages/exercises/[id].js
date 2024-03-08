@@ -3,6 +3,7 @@ import Editor from '@/components/editor';
 
 export default function Exercise({ exercise }) {
 
+
     return (
         <Layout>
             <div className='flex flex-wrap'>
@@ -29,6 +30,7 @@ export async function getStaticPaths() {
     try{
         const res = await fetch(`http://localhost:3001/problemset/`)
         const exercises = await res.json()
+ 
         const paths = exercises.map(exercise => ({
             params: { id: exercise._id },
         }))
@@ -43,8 +45,9 @@ export async function getStaticProps({ params }) {
     try{
         const res = await fetch(`http://localhost:3001/problemset/${params.id}`)
         const exercise = await res.json()
-    
+
         return { props: { exercise } }  
+     
     } catch(error){
         console.log(error)
     }

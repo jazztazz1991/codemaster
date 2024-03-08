@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "start": "node server.js"
   },
   "nodemonConfig": {
     "ignore": [
@@ -26,7 +27,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
     "ts-jest": "^29.1.2",
-    "uploadthing": "^6.4.1"
+    "uploadthing": "^6.4.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
