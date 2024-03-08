@@ -1,42 +1,46 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect, useCallback } from 'react'; 
 import CodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript';
 import { Button } from './ui/button';
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
 
-export default function Editor(props) {
-    const router = useRouter();
+export default function Editor({text, testName}) {
+    console.log("text:", text)
+    console.log("test name:",testName)
 
-    const [value, setValue] = useState(props.text);
+
+    const [value, setValue] = useState(text);
     const [results, setResults] = useState(null);
     const [_, setCookies] = useCookies(['access_token']);
     const [userLoggedIn, setUserLoggedIn] = useState(null);
+
 
     useEffect(() => {
         setUserLoggedIn(window.localStorage.getItem('userID'));
     })
 
+
     const onChange = useCallback((val, viewUpdate) => {
-        console.log('val:', val);
+        console.log('value changed:', val);
         setValue(val);
     }, []);
 
     const runTests = async (event) => {
-        console.log("runTests");
-        // event.preventDefault();
-        // try {
-        //     const response = await axios.post("http://localhost:3001/api/test", { text: value, test: props.testName });
+        event.preventDefault();
+        try {
+            // unable to use nodemon when running tests with jest. must disable before starting // 
+            const response = await axios.post("http://localhost:3001/api/test", {  text: value, test: testName  });
 
-        //     if (response) {
-        //         setResults(response);
-        //     } else {
-        //         console.log("no response received")
-        //     }
-        // } catch (err) {
-        //     console.log(err);
-        // }
+            if (response) {
+                setResults(response.data);
+                console.log("res:", response.data)
+            } else {
+                console.log("no response received")
+            }
+        } catch (err) {
+            console.log(error)
+        }
         const testResults = {
             success: false,
             suit: "Jest",
@@ -47,6 +51,7 @@ export default function Editor(props) {
             details: "Your code did not pass the test. Please try again."
         }
         setResults(testResults);
+    
     }
 
     const onSubmit = () => {
@@ -73,7 +78,7 @@ export default function Editor(props) {
                         <h2>Results</h2>
                         <ul className="testResults">
                             <li>Congratulations! Your tests did passed.</li>
-                            <h3>Test: {props.testName}</h3>
+                            <h3>Test: {testName}</h3>
                             <li><span className="loggedResults">Test Suite:</span> {results.suit}</li>
                             <li>Test Description: {results.description}</li>
                             <li>Expected Values: {results.expected}</li>
@@ -87,7 +92,7 @@ export default function Editor(props) {
                         <h2>Results</h2>
                         <div className="testResults">
                             <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Your tests did not pass.</h2>
-                            <p ><span className="font-semibold text-gray-900">Test: </span> {props.testName}</p>
+                            <p ><span className="font-semibold text-gray-900">Test: </span> {testName}</p>
                             <p><span className="font-semibold text-gray-900">Test Suite: </span>{results.suit}</p>
                             <p><span className="font-semibold text-gray-900">Test Description: </span>{results.description}</p>
                             <p><span className="font-semibold text-gray-900">Expected Values: </span>{results.expected}</p>
@@ -98,6 +103,7 @@ export default function Editor(props) {
                     </div>
                 ) : null}
             </div>
+            
         </div>
     )
 }

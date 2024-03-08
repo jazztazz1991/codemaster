@@ -45,16 +45,16 @@ export default function Exercises({ easyExercises, mediumExercises, hardExercise
 export async function getStaticProps() {
     const res = await fetch("http://localhost:3001/problemset")
     let exercises = await res.json()
-
-    const easyExercises = exercises.filter(exercise => exercise.difficulty === "easy");
-    const mediumExercises = exercises.filter(exercise => exercise.difficulty === "medium");
-    const hardExercises = exercises.filter(exercise => exercise.difficulty === "hard");
+    // console.log(exercises)
+    const easyExercises = exercises.filter(exercise => exercise.difficulty.toLowerCase()  === "easy");
+    const mediumExercises = exercises.filter(exercise => exercise.difficulty.toLowerCase()  === "medium");
+    const hardExercises = exercises.filter(exercise => exercise.difficulty.toLowerCase()  === "hard");
 
     return { props: { easyExercises, mediumExercises, hardExercises } }
 }
 
 export function ExerciseCard({ exercise }) {
-    console.log(exercise)
+ 
     return (
         <Card key={exercise._id} className="m-5">
             <div className="">
