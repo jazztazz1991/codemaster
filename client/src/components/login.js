@@ -18,7 +18,6 @@ export default function Login() {
 
         try {
             const response = await axios.post("http://localhost:3001/auth/login", { username, password });
-
             // console.log(response.data);
 
             if (response.data.message === "Username or Password is incorrect!") {
@@ -31,12 +30,11 @@ export default function Login() {
                 window.localStorage.setItem("userID", response.data.userID);
                 window.localStorage.setItem("admin", response.data.admin);
                 router.push('/');
-
             }
         } catch (error) {
             console.log(error)
         }
-    }
+}
     return (
         <>
 
