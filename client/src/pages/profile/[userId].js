@@ -21,7 +21,8 @@ export default function Profile({ userProfile }) {
 
     return (
         <Layout>
-            <div className="container mx-auto pt-28 cGradient">
+            <div className="cGradient">
+            <div className="container mx-auto pt-28">
                 <div className="grid grid-cols-2 gap-8">
 
                     <div className="flex flex-col items-center p-14 rounded-xl bg-white shadow-xl h-min">
@@ -76,6 +77,7 @@ export default function Profile({ userProfile }) {
                         <GenStats />
                     </div>
                 </div>
+            </div>
             </div>
         </Layout>
     )

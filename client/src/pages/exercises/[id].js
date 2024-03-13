@@ -6,7 +6,7 @@ export default function Exercise({ exercise }) {
 
     return (
         <Layout>
-            <div className='flex flex-wrap'>
+            <div className='flex flex-wrap hero'>
                 <div className='basis-2/3'>
                     <Editor
                         text={exercise.startCode}
