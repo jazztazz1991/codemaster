@@ -53,7 +53,7 @@ router.post("/admin/create", async (req, res) => {
 })
 
 //delete exercise
-router.delete("/admin/:exerciseId", adminAccess, async (req, res) => {
+router.delete("/admin/:exerciseId", async (req, res) => {
     const { exerciseId } = req.params;
 
     try {

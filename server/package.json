@@ -10,7 +10,7 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "userSubmissions/",
+      "codes/",
       "__tests__/*",
       "*.test.js",
       "*.spec.js"
@@ -23,19 +23,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
-    "jest-cli": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
-    "ts-jest": "^29.1.2",
-    "uploadthing": "^6.4.1",
-    "uuid": "^9.0.1"
+    "uploadthing": "^6.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-env": "^7.23.9",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0",
     "nodemon": "^1.19.4"
   }
 }

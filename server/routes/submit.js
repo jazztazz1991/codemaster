@@ -1,29 +1,45 @@
 const express = require("express");
 const router = express.Router();
-const { runCLI } = require('jest');
-const { generateFile } = require("../generateFile")
+const { getExpectedOutputs } = require("../tests/expectedOutput")
 
 router.post("/test", async (req, res) => {
+console.log("this is req.body", req.body)
 
-    const { text } = req.body;
+    const { text , test  } = req.body;
     console.log("text:", text)
+    console.log("test:", test)
 
     if(!text) {
         return res.json({ message: "No code provided to test"})
     }
     try{
-        const filePath = await generateFile("js", text )
-        // console.log("file path", filePath)
+        const expectedOutputs = getExpectedOutputs()
+        // console.log("this is the expected outputs:", expectedOutputs)
 
-        const jestConfig = {
-            "testMatch": ["**/code.test.js"], 
+        let matchingExpectedOutcome; 
+
+        if (expectedOutputs.hasOwnProperty(test)) {
+            matchingExpectedOutcome = test;
+            // console.log("matching outcome name?", matchingExpectedOutcome);
+        } 
+
+        const expectedOutput = expectedOutputs[test];
+        // console.log("expectedOutput",expectedOutput)
+
+        const userInput = text.replace(/\s+|;\s*(?!})/g, "").trim();
+        const solution = expectedOutput.replace(/\s+|;\s*(?!})/g, "").trim();
+        
+        console.log("userinput:", userInput)
+        console.log("solution:", solution)
+        
+        let message;
+        if (userInput === solution) {
+            message = "Accepted";
+        } else {
+            message = "Wrong Answer";
         }
 
-        const { results } = await runCLI(jestConfig, [process.cwd()])
-        console.log("results:", results)
-
-        return res.json({ filePath, testResults: results})
-    
+        return res.json({ message, expectedOutput, receivedInput: text, message });
     } catch(error){
         console.log(error)
         return res.status(500).json({ message: "Internal server error" });
