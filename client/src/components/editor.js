@@ -6,20 +6,17 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios'
 
 export default function Editor({text, testName}) {
-    console.log("text:", text)
-    console.log("test name:",testName)
-
+    // console.log("text:", text)
+    // console.log("test name:",testName)
 
     const [value, setValue] = useState(text);
     const [results, setResults] = useState(null);
     const [_, setCookies] = useCookies(['access_token']);
     const [userLoggedIn, setUserLoggedIn] = useState(null);
 
-
     useEffect(() => {
         setUserLoggedIn(window.localStorage.getItem('userID'));
     })
-
 
     const onChange = useCallback((val, viewUpdate) => {
         console.log('value changed:', val);
@@ -28,36 +25,27 @@ export default function Editor({text, testName}) {
 
     const runTests = async (event) => {
         event.preventDefault();
-        try {
-            // unable to use nodemon when running tests with jest. must disable before starting // 
-            const response = await axios.post("http://localhost:3001/api/test", {  text: value, test: testName  });
 
-            if (response) {
-                setResults(response.data);
+        try {
+            const response = await axios.post("http://localhost:3001/api/test", {  text: value, test: testName  });
+    
+            if (response && response.data) {
                 console.log("res:", response.data)
+                setResults(response.data);
+  
             } else {
-                console.log("no response received")
+                console.log("No response received")
             }
         } catch (err) {
-            console.log(error)
+            console.log(err)
         }
-        const testResults = {
-            success: false,
-            suit: "Jest",
-            description: "The description of the Test",
-            expected: "console.log('Hello World')",
-            received: "console.log('hello W0rld')",
-            error: "null",
-            details: "Your code did not pass the test. Please try again."
-        }
-        setResults(testResults);
-    
     }
 
     const onSubmit = () => {
         console.log("onSubmit");
-        
     }
+    // console.log("results:", results);
+    // console.log("results message:", results?.message);
     return (
         <div>
             <CodeMirror
@@ -73,35 +61,39 @@ export default function Editor({text, testName}) {
                 )}
             </div>
             <div id="results">
-                {results && results.success ? (
+                {results?.message.includes("Accepted") ? (
+    
                     <div>
-                        <h2>Results</h2>
-                        <ul className="testResults">
-                            <li>Congratulations! Your tests did passed.</li>
-                            <h3>Test: {testName}</h3>
-                            <li><span className="loggedResults">Test Suite:</span> {results.suit}</li>
-                            <li>Test Description: {results.description}</li>
-                            <li>Expected Values: {results.expected}</li>
-                            <li>Received Values: {results.received}</li>
-                            <li>Results: {results.details}</li>
-                        </ul>
-                    </div>
-                ) : null}
-                {results && !results.success ? (
-                    <div>
-                        <h2>Results</h2>
-                        <div className="testResults">
-                            <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Your tests did not pass.</h2>
-                            <p ><span className="font-semibold text-gray-900">Test: </span> {testName}</p>
-                            <p><span className="font-semibold text-gray-900">Test Suite: </span>{results.suit}</p>
-                            <p><span className="font-semibold text-gray-900">Test Description: </span>{results.description}</p>
-                            <p><span className="font-semibold text-gray-900">Expected Values: </span>{results.expected}</p>
-                            <p><span className="font-semibold text-gray-900">Received Values: </span>{results.received}</p>
-                            <p><span className="font-semibold text-gray-900">Location of errors: </span>{results.error}</p>
-                            <p><span className="font-semibold text-gray-900">Results: </span>{results.details}</p>
+                        <h1 className='mb-5 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>Results</h1>
+                        <div className="testResults">    
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">{results.message}</strong>
+                        </div>
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Expected {results.expectedOutput}</strong>
+                        </div>
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Received {results.receivedInput}</strong>
+                        </div>
                         </div>
                     </div>
-                ) : null}
+                ) : null }
+                {results?.message.includes("Wrong Answer")? (
+                    <div>
+                        <h1 className='mb-5 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>Results</h1>
+                        <div className="testResults">    
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">{results.message}</strong>
+                        </div>
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Expected {results.expectedOutput}</strong>
+                        </div>
+                        <div className='mt-5'>
+                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Received {results.receivedInput}</strong>
+                        </div>
+                        </div>
+                    </div>
+                ):null}
             </div>
             
         </div>
