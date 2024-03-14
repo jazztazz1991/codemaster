@@ -26,9 +26,11 @@ console.log("this is req.body", req.body)
         const expectedOutput = expectedOutputs[test];
         // console.log("expectedOutput",expectedOutput)
 
-        const userInput = text.replace(/\s*;+$/g, '');
-        const solution = expectedOutput.replace(/\s*;+$/g, '');
-
+        const userInput = text.replace(/\s+|;\s*(?!})/g, "").trim();
+        const solution = expectedOutput.replace(/\s+|;\s*(?!})/g, "").trim();
+        
+        console.log("userinput:", userInput)
+        console.log("solution:", solution)
         
         let message;
         if (userInput === solution) {

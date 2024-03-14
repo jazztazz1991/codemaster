@@ -4,10 +4,12 @@ import { javascript } from '@codemirror/lang-javascript';
 import { Button } from './ui/button';
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
+import ReactCodeBlock from './codeblock'
 
 export default function Editor({text, testName}) {
     // console.log("text:", text)
     // console.log("test name:",testName)
+  
 
     const [value, setValue] = useState(text);
     const [results, setResults] = useState(null);
@@ -47,7 +49,7 @@ export default function Editor({text, testName}) {
     // console.log("results:", results);
     // console.log("results message:", results?.message);
     return (
-        <div>
+        <div className='editorPage'>
             <CodeMirror
                 value={value}
                 height="500px"
@@ -69,14 +71,18 @@ export default function Editor({text, testName}) {
                         <div className='mt-5'>
                             <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">{results.message}</strong>
                         </div>
-                        <div className='mt-5'>
-                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Expected {results.expectedOutput}</strong>
+                        <div className='mt-2 mb-3'>Expected </div>
+                            <ReactCodeBlock 
+                                code={results.expectedOutput}
+                                language="javascript"
+                            />
                         </div>
-                        <div className='mt-5'>
-                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Received {results.receivedInput}</strong>
+                        <div className='mt-2 mb-3'>Recieved </div>
+                            <ReactCodeBlock 
+                                code={results.receivedInput}
+                                language="javascript"
+                            />
                         </div>
-                        </div>
-                    </div>
                 ) : null }
                 {results?.message.includes("Wrong Answer")? (
                     <div>
@@ -85,14 +91,18 @@ export default function Editor({text, testName}) {
                         <div className='mt-5'>
                             <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">{results.message}</strong>
                         </div>
-                        <div className='mt-5'>
-                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Expected {results.expectedOutput}</strong>
+                        <div className='mt-2 mb-3'>Expected </div>
+                            <ReactCodeBlock 
+                                code={results.expectedOutput}
+                                language="javascript"
+                            />
                         </div>
-                        <div className='mt-5'>
-                            <strong className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">Received {results.receivedInput}</strong>
+                        <div className='mt-2 mb-3'>Recieved </div>
+                            <ReactCodeBlock 
+                                code={results.receivedInput}
+                                language="javascript"
+                            />
                         </div>
-                        </div>
-                    </div>
                 ):null}
             </div>
             
