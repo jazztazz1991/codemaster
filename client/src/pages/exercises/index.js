@@ -12,7 +12,7 @@ import {
 export default function Exercises({ easyExercises, mediumExercises, hardExercises }) {
     return (
         <Layout>
-            <div id="exercisesPage">
+            <div className="hero" id="exercisesPage">
                 <h2 className="mt-6 text-lg leading-8 text-gray-900">Easy Exercises</h2>
                 <div className="flex grid grid-cols-2 items-center">
                     {easyExercises.map(exercise => (

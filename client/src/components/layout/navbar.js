@@ -23,10 +23,10 @@ export default function Navbar({ }) {
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex flex-shrink-0 items-center">
-                            <Link href="/"><h1 className="text-white">LOGO</h1></Link>
+                            <Link href="/"><img src="codemasterT.png" id="navLogo"></img></Link>
                         </div>
 
-                        <div className="hidden sm:ml-6 sm:block">
+                        <div className="hidden content-center h-auto sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 <Link href="/exercises" className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Exercises
                                 </Link>

@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex flex-shrink-0 items-center">
-                            <Link href="/"><h1 className="text-white">Baby Leetcode</h1></Link>
+                            <Link href="/"><h1 className="text-white">Code Master</h1></Link>
                             <h2 className="text-gray-300">Your beginning to a better future!</h2>
                         </div>
 
