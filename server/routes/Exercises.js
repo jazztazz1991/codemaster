@@ -71,13 +71,13 @@ router.delete("/admin/:exerciseId", async (req, res) => {
 })
 
 //update exercise
-router.put("/admin/:exerciseId", adminAccess, async (req, res) => {
+router.put("/admin/:exerciseId", async (req, res) => {
     const { exerciseId } = req.params;
-    const { language, title, question, solution, date } = req.body;
+    const { language, title, question, solution, date, test, startCode } = req.body;
     try {
         let updatedExercise = await ExerciseModel.findOneAndUpdate(
             { _id: exerciseId },
-            { language, title, question, solution, date },
+            { language, title, question, solution, date, test , startCode},
             { new: true }
         )
 
