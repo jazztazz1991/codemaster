@@ -8,25 +8,20 @@
     background: linear-gradient(180deg, rgba(31,41,55,1) 0%, rgba(255,255,255,1) 100%);
     border-top: 1px solid rgb(26, 35, 46);
 }
+
 /* exercise list CSS */
 #exercisesPage{
-    margin-bottom: 100px;
+  min-height: 100vh; 
+  padding-bottom: 60px; 
+  background-color: #e8edf7
 }
-#easy{
-    background-color: lightgreen;
-    padding: 2px 5px;
-    border-radius: 30%;
+
+
+.exercise-card:hover {
+  box-shadow: 0 0 0 1px inset #8E2DE2, 0 0 0 2px inset #4A00E0;
 }
-#medium{
-    background-color: yellow;
-    padding: 2px 5px;
-    border-radius: 30%;
-}
-#hard{
-    background-color: lightcoral;
-    padding: 2px 5px;
-    border-radius: 30%;
-}
+
+
 /* exercise/[id] CSS */
 #results{
     margin-bottom: 100px;
