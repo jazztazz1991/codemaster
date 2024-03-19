@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/card"
 import { GiPlainCircle , GiPlainSquare } from "react-icons/gi";
 import { IoTriangleSharp } from "react-icons/io5";
-import { useState } from "react";
-
+import SavedBtn from "@/components/savedBtn";
 
 export default function Exercises({ easyExercises, mediumExercises, hardExercises, exercises }) {
 
@@ -66,15 +65,15 @@ export async function getStaticProps() {
 }
 
 export function ExerciseCard({ exercise }) {
-    // console.log(exercise)
  
     const [ previewQuestion ] = exercise.question.split(".");
     // console.log(previewQuestion)
+    
     return (
-        <Link href={`/exercises/${exercise._id}`} > 
-          
+    <div className="exercise-wrapper">
         <Card key={exercise._id} className="m-5 shadow-xl exercise-card" style={{ height: '200px', borderRadius: '14px' }}>
             <div className="">
+            <Link href={`/exercises/${exercise._id}`} > 
                 <CardHeader>
                         <CardTitle>{exercise.title}</CardTitle>
                 </CardHeader>
@@ -109,10 +108,15 @@ export function ExerciseCard({ exercise }) {
                     <div className="col-span-4">
                         <p className="flex items-center text-left text-zinc-600 pr-2 sm:ml-6 sm:pr-0">{previewQuestion}</p>
                     </div>
-
                 </CardContent>
+                </Link>
+            </div>
+
+            <div>
+                <SavedBtn exercise={exercise} />
             </div>
         </Card>
-    </Link>
+   
+    </div>
     )
 }
