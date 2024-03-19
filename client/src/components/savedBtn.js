@@ -38,7 +38,7 @@ export default function SavedBtn({ exercise }){
  }
     return(
         <div>
-         <button className="text-yellow-400" onClick={handleSaving}> { saved ? <FaStar /> : <FaRegStar />}
+         <button className="text-yellow-400 mr-3 mt-3" onClick={handleSaving}> { saved ? <FaStar size={20}/> : <FaRegStar size={20}/>}
             </button>
         </div>
     )

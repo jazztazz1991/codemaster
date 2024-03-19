@@ -15,12 +15,12 @@ export default function Exercises({ easyExercises, mediumExercises, hardExercise
 
 
     return (
-        <Layout className="">
+        <Layout>
             <div className="" id="exercisesPage">
             <CardHeader className="mb-8">
-                    <CardTitle className="text-center text-4xl mt-10 mb-4 font-bold"> ✨ Explore the Javascript exercises on Code Master ✨</CardTitle>
+                    <CardTitle className="text-center text-4xl mt-10 mb-4 font-bold"> 🚀 Explore the Javascript exercises on Code Master 🚀  </CardTitle>
 
-                    <h1 className="text-center text-xl">Work through each exercise to improve your skills. They’re great practice and fun to do! </h1>
+                    <h1 className="text-center text-xl">Work through each exercise to improve your skills. They’re great practice and fun to do! ✨ </h1>
             </CardHeader>
                 
                 <div className="flex grid grid-cols-2 items-center">
@@ -71,8 +71,14 @@ export function ExerciseCard({ exercise }) {
     
     return (
     <div className="exercise-wrapper">
-        <Card key={exercise._id} className="m-5 shadow-xl exercise-card" style={{ height: '200px', borderRadius: '14px' }}>
-            <div className="">
+
+        
+        <Card key={exercise._id} className="m-5 shadow-xl exercise-card" style={{ height: '200px', borderRadius: '14px', position: 'relative' }}>
+            <div className="">  
+            <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                <SavedBtn exercise={exercise} />
+            </div>
+
             <Link href={`/exercises/${exercise._id}`} > 
                 <CardHeader>
                         <CardTitle>{exercise.title}</CardTitle>
@@ -82,7 +88,7 @@ export function ExerciseCard({ exercise }) {
                         {exercise.difficulty === "easy" ? 
                             <p className="flex col-spa-1 items-center text-balance">
                                 <span className="bg-green-100 border border-green-500 px-3 py-2 rounded-full flex items-center font-bold text-green-600 text-sm"id="easy">
-                                    <GiPlainCircle className="text-green-600 mr-1.5 h-2.5 w-2.5" />  
+                                    <GiPlainCircle size={9} className="text-green-600 mr-1.5" />  
                                     {exercise.difficulty} 
                                 </span>
                             </p> : null}
@@ -90,7 +96,7 @@ export function ExerciseCard({ exercise }) {
                         {exercise.difficulty === "medium" ? 
                             <p className="flex col-spa-1 items-center text-balance">
                                 <span className="bg-yellow-100 border border-yellow-500 px-3 py-2 rounded-full flex items-center font-bold text-yellow-600 text-sm"id="easy">
-                                    <GiPlainSquare className="text-yellow-600 mr-1.5 h-2.5 w-2.5" />  
+                                    <GiPlainSquare size={9} className="text-yellow-600 mr-1.5" />  
                                     {exercise.difficulty} 
                                 </span>
                             </p> : null}
@@ -99,7 +105,7 @@ export function ExerciseCard({ exercise }) {
                         {exercise.difficulty === "hard" ? 
                             <p className="flex col-spa-1 items-center text-balance">
                                 <span className="bg-red-100 border border-red-500 px-3 py-2 rounded-full flex items-center font-bold text-red-600 text-sm"id="easy">
-                                    <IoTriangleSharp className="text-red-600 mr-1.5 h-3 w-3" />  
+                                    <IoTriangleSharp size={12} className="text-red-600 mr-1.5" />  
                                     {exercise.difficulty} 
                                 </span>
                             </p> : null}
@@ -112,9 +118,6 @@ export function ExerciseCard({ exercise }) {
                 </Link>
             </div>
 
-            <div>
-                <SavedBtn exercise={exercise} />
-            </div>
         </Card>
    
     </div>
